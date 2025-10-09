@@ -15,7 +15,7 @@ body {
 }
 
 .background-img {
-  background-image: url("../img/desk-earth.jpg");
+  // background-image: url("../img/desk-earth.jpg");
   background-size: cover;
   position: fixed;
   top: 0;
