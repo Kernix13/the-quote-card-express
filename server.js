@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-require("dotenv").config(); // Loads variables from .env file into process.env
+require("dotenv").config(); 
 const cors = require("cors");
 
 const app = express();
@@ -18,10 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 async function getRandomImage() {
-  const BASE_URL = 'https://api.unsplash.com/photos/random/';
+  const base_url = 'https://api.unsplash.com/photos/random/'
   const endpoint = `?client_id=${process.env.CLIENT_ID}`;
   try {
-    const response = await fetch(BASE_URL + endpoint);
+    const response = await fetch(base_url + endpoint);
     const returnedData = await response.json();
     const receivedPhotoUrl = returnedData.urls.regular;
 

@@ -7,12 +7,13 @@ const elements = {
 
 /* see week4.md for code that was here */
 
-/* Unsplash API */ 
-// server.js > getRandomImage
-// 'https://api.unsplash.com/photos/random/' 
+/* Unsplash API 
+  server.js > getRandomImage
+  'https://api.unsplash.com/photos/random/' 
 
-// js/index.js > getRandomImage
-// 'http://localhost:8080/api/v1/getRandomImage'
+  js/index.js > getRandomImage
+  'http://localhost:8080/api/v1/getRandomImage'
+*/ 
 
 async function getRandomImage() {
   const endpoint = 'http://localhost:8080/api/v1/getRandomImage';
