@@ -30,10 +30,10 @@ app.get() code
 
 ```js
 app.get('/api/photos', async (req, res) => {
-  const BASE_URL = 'https://api.unsplash.com/photos/random/';
+  const API_BASE_URL = 'https://api.unsplash.com/photos/random/';
   const endpoint = `?client_id=${process.env.CLIENT_ID}`;
   try {
-    const apiResponse = await fetch(BASE_URL + endpoint);
+    const apiResponse = await fetch(API_BASE_URL + endpoint);
     const data = await apiResponse.json();
     res.json(data);
   } catch (err) {
@@ -45,9 +45,9 @@ app.get('/api/photos', async (req, res) => {
 
 1. `'/api/photos'`: the name for our endpoint - `photos` for this code, but it could be anything. I removed `v1`, but that could be included also.
 2. `async (req, res)`: setting the callback to async because we are makign a fetch to the Unsplash API
-3. `BASE_URL` and `endpoint`: cleaning up the URL for fetch.
+3. `API_BASE_URL` and `endpoint`: just cleaning up the URL for fetch.
 4. `apiResponse` and `data`: self-explanatory
-5. `res.json(data)`: This is the vital part that is returned to getRandomPhoto
+5. `res.json(data)`: This is the vital part that is returned/sent to getRandomPhoto
 
 ## 2. public/js/index.js
 
@@ -55,8 +55,9 @@ getRandomImage()
 
 ```js
 async function getRandomImage() {
+  const DOMAIN = 'http://localhost:8080';
   try {
-    const response = await fetch('http://localhost:8080/api/photos');
+    const response = await fetch(DOMAIN + '/api/photos');
     if (!response.ok) {
       throw new Error('Failed to fetch image.');
     }
@@ -97,8 +98,8 @@ https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}
 > ### You will be using the Fetch API twice!
 
 1. Write your fetch function but with your API endpoint inside of fetch.
-2. Create app.get() in your package.json "main" JavaScript file with the first argument being equal to the API endpoint in step # 1 (minus the DOMAIN)
-   1. Inside the fetch for app.get, include the Unsplash end point (or another API endpoint) with the .env value for the API key
+2. Create `app.get()` in your "main" JavaScript file (what is in `package.json`) with the first argument being equal to the API endpoint in step # 1 (minus the DOMAIN)
+   1. Inside the fetch for `app.get`, include the Unsplash end point (or another API endpoint) with the `.env` value for the API key
 
 That is it!
 
@@ -109,11 +110,11 @@ That is it!
 
 ```js
 // your main/server JavaScript file
-app.get('your_api', async (req, res) => {
-  const BASE_URL = 'domain_url';
+app.get('/your/api/path', async (req, res) => {
+  const API_BASE_URL = 'domain_url';
   const endpoint = `api_endpoint`;
   try {
-    const apiResponse = await fetch(BASE_URL + endpoint);
+    const apiResponse = await fetch(API_BASE_URL + endpoint);
     const data = await apiResponse.json();
     res.json(data);
   } catch (err) {
@@ -123,11 +124,11 @@ app.get('your_api', async (req, res) => {
 });
 
 // the front end function
-// your_api -> from your main JS file, 1st arg in app.get()
+// /your/api/path -> from your main JS file, 1st arg in app.get()
 async function someFunctionName() {
   const DOMAIN = 'local_dev_url_or_real_domain';
   try {
-    const response = await fetch(DOMAIN + 'your_api');
+    const response = await fetch(DOMAIN + '/your/api/path');
     if (!response.ok) {
       throw new Error('Failed to fetch image.');
     }
@@ -140,3 +141,17 @@ async function someFunctionName() {
 }
 someFunctionName();
 ```
+
+The only variables you need:
+
+server.js:
+
+1. /your/api/path
+2. API_BASE_URL
+3. endpoint
+4. CLIENT_ID in .env
+
+front-end function
+
+1. DOMAIN
+2. /your/api/path which is from server.js (or vice versa)
