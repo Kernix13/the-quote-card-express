@@ -1,31 +1,25 @@
 "use strict"
 
 const elements = {
-    quote: document.getElementById("quote"),
-    author: document.getElementById("author"),
+  quote: document.getElementById('quote'),
+  author: document.getElementById('author'),
 };
 
-/* see week4.md for code that was here */
-
-/* Unsplash API 
-  server.js > getRandomImage
-  'https://api.unsplash.com/photos/random/' 
-
-  js/index.js > getRandomImage
-  'http://localhost:8080/api/v1/getRandomImage'
-*/ 
-
 async function getRandomImage() {
-  const endpoint = 'http://localhost:8080/api/v1/getRandomImage';
   try {
-    const response = await fetch(endpoint);
-    const returnedData = await response.json();
-    const receivedPhotoUrl = returnedData.data;
+    const response = await fetch('http://localhost:8080/api/photos');
+    if (!response.ok) {
+      throw new Error('Failed to fetch image.');
+    }
+    const data = await response.json();
+
+    const photoUrl = data.urls.regular;
+    console.log(photoUrl);
 
     const imgDiv = document.querySelector('.background-img');
-    imgDiv.style.backgroundImage = `url(${receivedPhotoUrl})`;
-  } catch (error) {
-    console.error(error);
+    imgDiv.style.backgroundImage = `url(${photoUrl})`;
+  } catch (err) {
+    console.error(err);
   }
 }
 getRandomImage();
