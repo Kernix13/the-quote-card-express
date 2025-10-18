@@ -6,8 +6,9 @@ const elements = {
 };
 
 async function getRandomImage() {
+  const DOMAIN = 'http://localhost:8080';
   try {
-    const response = await fetch('http://localhost:8080/api/photos');
+    const response = await fetch(DOMAIN + '/api/photos');
     if (!response.ok) {
       throw new Error('Failed to fetch image.');
     }

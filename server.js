@@ -9,9 +9,10 @@ const port = 8080;
 app.use(express.static('./public'));
 
 app.get('/api/photos', async (req, res) => {
-  const endpoint = `https://api.unsplash.com/photos/random/?client_id=${process.env.CLIENT_ID}`;
+  const BASE_URL = 'https://api.unsplash.com/photos/random/';
+  const endpoint = `?client_id=${process.env.CLIENT_ID}`;
   try {
-    const apiResponse = await fetch(endpoint);
+    const apiResponse = await fetch(BASE_URL + endpoint);
     const data = await apiResponse.json();
     res.json(data);
   } catch (err) {
