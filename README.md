@@ -148,8 +148,8 @@ server.js:
 
 1. `/your/api/path`
 2. `API_BASE_URL`
-3. `endpoint`: including `process.env.CLIENT_ID`
-4. `process.env.CLIENT_ID` from `.env` file
+3. `endpoint` which includes `CLIENT_ID`
+4. `CLIENT_ID` from `.env` file
 
 front-end function
 
