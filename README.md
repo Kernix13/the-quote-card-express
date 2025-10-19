@@ -126,11 +126,11 @@ app.get('/your/api/path', async (req, res) => {
 // the front end function
 // /your/api/path -> from your main JS file, 1st arg in app.get()
 async function someFunctionName() {
-  const DOMAIN = 'local_dev_url_or_real_domain';
+  const DOMAIN = 'local_dev_or_site_url';
   try {
     const response = await fetch(DOMAIN + '/your/api/path');
     if (!response.ok) {
-      throw new Error('Failed to fetch image.');
+      throw new Error('Failed to fetch from API.');
     }
     const data = await response.json();
 
@@ -146,12 +146,23 @@ The only variables you need:
 
 server.js:
 
-1. /your/api/path
-2. API_BASE_URL
-3. endpoint
-4. CLIENT_ID in .env
+1. `/your/api/path`
+2. `API_BASE_URL`
+3. `endpoint`: including `process.env.CLIENT_ID`
+4. `process.env.CLIENT_ID` from `.env` file
 
 front-end function
 
-1. DOMAIN
-2. /your/api/path which is from server.js (or vice versa)
+1. `DOMAIN`: your `localhost` address or website
+2. `/your/api/path` from server.js (or vice versa)
+
+### Top Common Uses of Express.js
+
+- Act as a proxy to hide API keys ✅ or handle CORS 📌
+- Create your own API that returns JSON data 📌
+- Add custom middleware for logging, validation, or error handling
+- Connect to a database for full-stack apps
+- Handle forms, authentication, and sessions
+- Build RESTful APIs (CRUD) for mobile or frontend frameworks
+- Serve static files (HTML, CSS, JS, images) ❓
+- Use templating engines to generate dynamic HTML
