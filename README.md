@@ -1,4 +1,4 @@
-# README (from test-merge-conflict)
+# README
 
 server.js and public/js/index.js code
 
